@@ -4,5 +4,6 @@ export interface ICard {
     headsValue: string;
     playable: boolean;
     handleClick: Function;
+    placedOnBoard: boolean;
     
 }
