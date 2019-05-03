@@ -1,4 +1,4 @@
-export interface ICard {
+export default interface ICardProps {
     id: number;
     headsOnTop: boolean;
     headsValue: string;

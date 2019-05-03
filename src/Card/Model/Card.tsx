@@ -1,11 +1,10 @@
-import { ICard } from "./ICard";
+import ICardProps from "./ICardProps";
 import * as React from 'react';
-import ICardState from './ICardState';
 import '../Style/Card.css';
 
-export default class Card extends React.Component<ICard, ICardState>{
+export default class Card extends React.Component<ICardProps>{
 
-    constructor(props: ICard) {
+    constructor(props: ICardProps) {
         super(props);
     }
 
