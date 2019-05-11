@@ -1,35 +1,49 @@
 import * as React from 'react';
-import ICardProps from 'src/Card/Model/ICardProps';
-import Card from 'src/Card/Model/Card';
-import IBoardProps from './IBoardProps';
+import ICardProps from 'src/domain/card/model/ICardProps';
+import Card from 'src/domain/card/model/Card';
+// import IBoardProps from './IBoardProps';
 import IBoardState from './IBoardState';
+// import '../Style/Board.css';
+import CardService from 'src/services/CardService';
+import ICardService from 'src/services/ICardService';
 
+export default class Board extends React.Component<{}, IBoardState>{
+  private cardService: ICardService;
+  private comparedCards: Array<ICardProps> = new Array<ICardProps>();
 
-export default class Board extends React.Component<IBoardProps, IBoardState>{
-
-    constructor(props: IBoardProps) {
+  // TODO: this component should be responsible only for placing cards on board
+  // TODO: all logic and state change should be moved to App component
+  
+    constructor(props: Readonly<{}>) {
         super(props);
         this.handleCardClick = this.handleCardClick.bind(this);
-
-        this.state = {
-            cards: [
-                { id: 0, headsOnTop: false, headsValue: "One", playable: true, placedOnBoard: true, handleClick: this.handleCardClick },
-                { id: 1, headsOnTop: false, headsValue: "Two", playable: true, placedOnBoard: true, handleClick: this.handleCardClick },
-                { id: 2, headsOnTop: false, headsValue: "One", playable: true, placedOnBoard: true, handleClick: this.handleCardClick },
-                { id: 3, headsOnTop: false, headsValue: "Two", playable: true, placedOnBoard: true, handleClick: this.handleCardClick }
-            ]
+        this.cardService = new CardService();
+        this.state={
+          cards: new Array<ICardProps>(),
+          isLoadingCards: false
         };
     }
-
-    private comparedCards: Array<ICardProps> = new Array<ICardProps>();
+    
 
     componentDidUpdate(){
         if(this.comparedCards.length === 2){
           this.compareCardsAndSetState();
           this.comparedCards = new Array<ICardProps>();
-        } 
+        }
       }
     
+      componentDidMount(){
+        this.setState({
+          cards: new Array<ICardProps>(),
+          isLoadingCards: true
+        });
+        this.cardService.getCards(this.handleCardClick).then((data)=>{
+          this.setState({
+            cards: data,
+            isLoadingCards: false
+          });
+        });
+      }
       private compareCardsAndSetState(){    
         let areCardMatched: boolean = this.comparedCards[0].headsValue === this.comparedCards[1].headsValue
         this.notifyUserAndChangeState(areCardMatched);
@@ -75,18 +89,24 @@ export default class Board extends React.Component<IBoardProps, IBoardState>{
 
       public render() {
         return (
-          <div>
-            {this.state.cards.map(mcard => 
-              {
-                if(mcard.placedOnBoard){
-                  return <Card key={mcard.id} {...mcard}/>
-                }
-                else{
-                  return <div className='card'> :-) </div>
-                }
+
+          <div className='board'>
+            {!this.state.isLoadingCards ? this.state.cards.map((mcard, index) => {
+              if (mcard.placedOnBoard) {
+                return <Card key={mcard.id} {...mcard} />
               }
-            )}
+              else {
+                return <div className='card'> :-) </div>
+              }
+            }
+            )
+              :
+              <div>
+                loading cards
           </div>
+            }
+          </div>
+
         );
       }
 }
