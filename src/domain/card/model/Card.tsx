@@ -1,6 +1,6 @@
 import ICardProps from "./ICardProps";
 import * as React from 'react';
-import '../Style/Card.css';
+import '../style/Card.css';
 
 export default class Card extends React.Component<ICardProps>{
 
