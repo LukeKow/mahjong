@@ -1,5 +1,6 @@
-import ICard from 'src/domain/card/ICard';
+import ICardDomainModel from 'src/domain/card/ICardDomainModel';
+import ICardAppModel from 'src/application/card/ICardAppModel';
 
 export default interface ICardDomainToAppModelMapper{
-    map (card: ICard): ICardAppModel;
+    map (card: ICardDomainModel): ICardAppModel;
 }

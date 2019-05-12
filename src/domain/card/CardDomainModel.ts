@@ -1,6 +1,6 @@
-import ICard from './ICard';
+import ICardDomainModel from './ICardDomainModel';
 
-export default class Card implements ICard{
+export default class CardDomainModel implements ICardDomainModel{
     id: number;    
     headsOnTop: boolean;
     headsValue: string;

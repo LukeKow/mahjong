@@ -1,11 +1,11 @@
-import ICard from 'src/domain/card/ICard';
-import ICardSource from './ICardSource';
+import ICardDomainModel from 'src/domain/card/ICardDomainModel';
+import ICardDomainModelSource from './ICardDomainModelSource';
 
-export default class CardSource implements ICardSource {
-    async getCards(): Promise<Array<ICard>> {
-        let cards = new Promise<Array<ICard>>((resolve, reject) => {
+export default class CardDomainModelSource implements ICardDomainModelSource {
+    async getCards(): Promise<Array<ICardDomainModel>> {
+        let cards = new Promise<Array<ICardDomainModel>>((resolve, reject) => {
             setTimeout(() => 
-                resolve(new Array<ICard>(
+                resolve(new Array<ICardDomainModel>(
                     { id: 0, headsOnTop: false, headsValue: "One", playable: true, placedOnBoard: true },
                     { id: 1, headsOnTop: false, headsValue: "Two", playable: true, placedOnBoard: true },
                     { id: 2, headsOnTop: false, headsValue: "One", playable: true, placedOnBoard: true },
@@ -13,7 +13,7 @@ export default class CardSource implements ICardSource {
                 )
             ), 1000);
           });
-        let result: Array<ICard> = await cards;
+        let result: Array<ICardDomainModel> = await cards;
         return result;
     }
 }
