@@ -3,7 +3,6 @@ export default interface ICardProps {
     headsOnTop: boolean;
     headsValue: string;
     playable: boolean;
-    handleClick: Function;
     placedOnBoard: boolean;
     
 }

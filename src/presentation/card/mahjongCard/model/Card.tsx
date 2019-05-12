@@ -10,15 +10,16 @@ export default class Card extends React.Component<ICardProps>{
 
     public render() {
         return (
-            <div className="card" onClick={this.handleClick} >
+            // <div className="card" onClick={this.handleClick} >
+            <div className="card">
                 {this.renderCard()}
             </div>
         );
     }
 
-    private handleClick = () => {
-        this.props.handleClick(this.props.id);
-    }
+    // private handleClick = () => {
+    //     this.props.handleClick(this.props.id);
+    // }
 
     private renderCard() {
         return this.props.headsOnTop ?

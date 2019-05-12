@@ -1,6 +1,6 @@
 import * as React from 'react';
 import './App.css';
-import Board from './domain/board/model/Board';
+import Board from './presentation/board/mahjongBoard/model/Board';
 
 export default class App extends React.Component<{},{}> {  
 
