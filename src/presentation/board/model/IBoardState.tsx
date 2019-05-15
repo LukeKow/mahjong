@@ -1,4 +1,4 @@
-import ICardProps from './node_modules/src/presentation/card/mahjongCard/model/ICardProps';
+import ICardProps from 'src/presentation/card/mahjongCard/model/ICardProps';
 
 export default interface IBoardState{
     cards: Array<ICardProps>;

@@ -1,25 +1,24 @@
-import ICardProps from "./ICardProps";
 import * as React from 'react';
 import '../style/Card.css';
+import ICardAppModel from 'src/application/card/ICardAppModel';
 
-export default class Card extends React.Component<ICardProps>{
+export default class MahjongCard extends React.Component<ICardAppModel>{
 
-    constructor(props: ICardProps) {
+    constructor(props: ICardAppModel) {
         super(props);
     }
 
     public render() {
         return (
-            // <div className="card" onClick={this.handleClick} >
-            <div className="card">
+            <div className="card" onClick={this.handleClick} >
                 {this.renderCard()}
             </div>
         );
     }
 
-    // private handleClick = () => {
-    //     this.props.handleClick(this.props.id);
-    // }
+    private handleClick = () => {
+        this.props.handleClick(this.props.id);
+    }
 
     private renderCard() {
         return this.props.headsOnTop ?

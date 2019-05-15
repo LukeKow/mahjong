@@ -1,8 +1,5 @@
-export default interface ICardAppModel{
-    id: number;
-    headsOnTop: boolean;
-    headsValue: string;
-    playable: boolean;
-    handleClick: Function;
-    placedOnBoard: boolean;
+import ICardDomainModel from 'src/domain/card/ICardDomainModel';
+
+export default interface ICardAppModel extends ICardDomainModel{
+   handleClick: Function;
 }

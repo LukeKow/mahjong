@@ -1,6 +1,6 @@
-import ICardProps from 'src/presentation/card/mahjongCard/model/ICardProps';
+import ICardAppModel from 'src/application/card/ICardAppModel';
 
 export default interface IBoardState{
-    cards: Array<ICardProps>;
+    cards: Array<ICardAppModel>;
     isLoadingCards: boolean;
 }

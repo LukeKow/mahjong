@@ -1,11 +1,11 @@
 import * as React from 'react';
-import ICardProps from './node_modules/src/presentation/card/mahjongCard/model/ICardProps';
-import Card from './node_modules/src/presentation/card/mahjongCard/model/Card';
+import ICardProps from 'src/presentation/card/mahjongCard/model/ICardProps';
+import Card from 'src/presentation/card/mahjongCard/model/Card';
 // import IBoardProps from './IBoardProps';
 import IBoardState from './IBoardState';
 // import '../Style/Board.css';
-import CardService from './node_modules/src/persistance/card/CardSource';
-import ICardService from './node_modules/src/persistance/card/ICardSource';
+import CardService from 'src/persistance/card/CardSource';
+import ICardService from 'src/persistance/card/ICardSource';
 
 export default class Board extends React.Component<{}, IBoardState>{
   private cardService: ICardService;
