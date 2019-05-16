@@ -1,11 +1,8 @@
 import * as React from 'react';
 import MahjongCard from 'src/presentation/card/mahjongCard/MahjongCard';
 import IBoardState from './IBoardState';
-import CardDomainModelSource from 'src/persistance/card/domainModelSource/CardDomainModelSource';
 import ICardAppModel from 'src/application/card/ICardAppModel';
-import ICardAppModelSource from 'src/persistance/card/appModelSource/ICardAppModelSource';
 import IBoardAppModel from 'src/application/board/IBoardAppModel';
-import ICardDomainToAppModelMapper from 'src/services/card/ICardDomainToAppModelMapper';
 
 export default class MahjongBoard extends React.Component<IBoardAppModel, IBoardState>{
   
@@ -89,7 +86,7 @@ export default class MahjongBoard extends React.Component<IBoardAppModel, IBoard
         return (
 
           <div className='board'>
-            {!this.state.isLoadingCards ? this.state.cards.map((mcard, index) => {
+            {!this.state.isLoadingCards ? this.state.cards.map((mcard) => {
               if (mcard.placedOnBoard) {
                 return <MahjongCard key={mcard.id} {...mcard} />
               }

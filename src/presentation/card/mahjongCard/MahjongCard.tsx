@@ -1,5 +1,5 @@
 import * as React from 'react';
-import '../style/Card.css';
+import '../mahjongCard/style/Card.css'
 import ICardAppModel from 'src/application/card/ICardAppModel';
 
 export default class MahjongCard extends React.Component<ICardAppModel>{
@@ -28,7 +28,7 @@ export default class MahjongCard extends React.Component<ICardAppModel>{
     private renderTailsOnTop = (): JSX.Element => {
         return (
             <div className="cardValue">
-                X
+                {this.props.tailsValue}
             </div>
         );
     }
