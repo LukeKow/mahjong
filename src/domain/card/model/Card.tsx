@@ -1,10 +1,10 @@
+import ICardProps from "./ICardProps";
 import * as React from 'react';
-import '../mahjongCard/style/Card.css'
-import ICardAppModel from 'src/application/card/ICardAppModel';
+import '../style/Card.css';
 
-export default class MahjongCard extends React.Component<ICardAppModel>{
+export default class Card extends React.Component<ICardProps>{
 
-    constructor(props: ICardAppModel) {
+    constructor(props: ICardProps) {
         super(props);
     }
 
@@ -28,7 +28,7 @@ export default class MahjongCard extends React.Component<ICardAppModel>{
     private renderTailsOnTop = (): JSX.Element => {
         return (
             <div className="cardValue">
-                {this.props.tailsValue}
+                X
             </div>
         );
     }

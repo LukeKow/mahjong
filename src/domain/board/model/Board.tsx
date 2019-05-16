@@ -1,20 +1,25 @@
 import * as React from 'react';
-import MahjongCard from 'src/presentation/card/mahjongCard/MahjongCard';
+import ICardProps from 'src/domain/card/model/ICardProps';
+import Card from 'src/domain/card/model/Card';
+// import IBoardProps from './IBoardProps';
 import IBoardState from './IBoardState';
-import ICardAppModel from 'src/application/card/ICardAppModel';
-import IBoardAppModel from 'src/application/board/IBoardAppModel';
+// import '../Style/Board.css';
+import CardService from 'src/services/CardService';
+import ICardService from 'src/services/ICardService';
 
-export default class MahjongBoard extends React.Component<IBoardAppModel, IBoardState>{
-  
-  private comparedCards: Array<ICardAppModel> = new Array<ICardAppModel>();
+export default class Board extends React.Component<{}, IBoardState>{
+  private cardService: ICardService;
+  private comparedCards: Array<ICardProps> = new Array<ICardProps>();
+
   // TODO: this component should be responsible only for placing cards on board
   // TODO: all logic and state change should be moved to App component
   
-    constructor(props: IBoardAppModel) {
+    constructor(props: Readonly<{}>) {
         super(props);
         this.handleCardClick = this.handleCardClick.bind(this);
+        this.cardService = new CardService();
         this.state={
-          cards: new Array<ICardAppModel>(),
+          cards: new Array<ICardProps>(),
           isLoadingCards: false
         };
     }
@@ -23,16 +28,16 @@ export default class MahjongBoard extends React.Component<IBoardAppModel, IBoard
     componentDidUpdate(){
         if(this.comparedCards.length === 2){
           this.compareCardsAndSetState();
-          this.comparedCards = new Array<ICardAppModel>();
+          this.comparedCards = new Array<ICardProps>();
         }
       }
     
       componentDidMount(){
         this.setState({
-          cards: new Array<ICardAppModel>(),
+          cards: new Array<ICardProps>(),
           isLoadingCards: true
         });
-        this.props.cardsSource.getCards(this.handleCardClick).then((data)=>{
+        this.cardService.getCards(this.handleCardClick).then((data)=>{
           this.setState({
             cards: data,
             isLoadingCards: false
@@ -86,9 +91,9 @@ export default class MahjongBoard extends React.Component<IBoardAppModel, IBoard
         return (
 
           <div className='board'>
-            {!this.state.isLoadingCards ? this.state.cards.map((mcard) => {
+            {!this.state.isLoadingCards ? this.state.cards.map((mcard, index) => {
               if (mcard.placedOnBoard) {
-                return <MahjongCard key={mcard.id} {...mcard} />
+                return <Card key={mcard.id} {...mcard} />
               }
               else {
                 return <div className='card'> :-) </div>
