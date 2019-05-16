@@ -1,9 +1,8 @@
-export default interface ICardProps {
+export default interface ICardDomainModel{
     id: number;
     headsOnTop: boolean;
     headsValue: string;
+    tailsValue: string;
     playable: boolean;
-    handleClick: Function;
     placedOnBoard: boolean;
-    
 }
