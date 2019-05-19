@@ -9,7 +9,10 @@ export default class App extends React.Component<{},{}> {
   //private mahjongCardsGetter = new this.mahjongCardsGetter();
   public render() {
     return (
+      <div>
+        Enter board size: <input type='number'/>
       <Board />
+      </div>
     );
   }
 }
