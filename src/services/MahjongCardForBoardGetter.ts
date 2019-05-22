@@ -1,14 +1,8 @@
-import ICardService from './ICardService'
+import ICardForBoardGetter from './ICardForBoardGetter';
 import ICardProps from 'src/domain/card/model/ICardProps';
-// import ICardForBoardGetter from './ICardForBoardGetter';
-// import MahjongCardForBoardGetter from './MahjongCardForBoardGetter';
 
-export default class CardService implements ICardService {
-    // private cardsGetter: ICardForBoardGetter;
+export default class MahjongCardForBoardGetter implements ICardForBoardGetter{
     
-    // constructor(boardSize: number){
-    //     this.cardsGetter = new MahjongCardForBoardGetter(boardSize);
-    // }
     constructor(boardSize: number){
         this.totalNumberOfCards = boardSize * boardSize;
     }
@@ -72,24 +66,4 @@ export default class CardService implements ICardService {
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min)) + min;
       }
-    // async getCards(handleCardClick: Function): Promise<Array<ICardProps>> {
-    //     let cards = this.cardsGetter.getCards().then((cards) => {
-    //         cards.forEach((card) => {
-    //             card.handleClick = handleCardClick;
-    //         });
-    //         return cards;
-    //     });
-    //     // let cardsa = new Promise<Array<ICardProps>>((resolve, reject) => {
-    //     //     setTimeout(() => 
-    //     //         resolve(new Array<ICardProps>(
-    //     //             { id: 0, headsOnTop: false, headsValue: "One", tailsValue:'[MAHJONG]', playable: true, placedOnBoard: true, handleClick:handleCardClick },
-    //     //             { id: 1, headsOnTop: false, headsValue: "Two", tailsValue:'[MAHJONG]', playable: true, placedOnBoard: true, handleClick:handleCardClick },
-    //     //             { id: 2, headsOnTop: false, headsValue: "One", tailsValue:'[MAHJONG]', playable: true, placedOnBoard: true, handleClick:handleCardClick },
-    //     //             { id: 3, headsOnTop: false, headsValue: "Two", tailsValue:'[MAHJONG]', playable: true, placedOnBoard: true, handleClick:handleCardClick }
-    //     //         )
-    //     //     ), 1000);
-    //     //   });
-    //     let result: Array<ICardProps> = await cards;
-    //     return result;
-    // }
 }
