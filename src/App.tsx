@@ -8,7 +8,7 @@ import CardService from './services/CardService';
 // import ICardForBoardGetter from './services/ICardForBoardGetter';
 // import MahjongCardForBoardGetter from './services/MahjongCardForBoardGetter';
 
-interface IAppState{
+interface IAppState {
   boardSize: number;
   cards: ICardProps[];
   isLoadingCards: boolean;
@@ -18,69 +18,73 @@ export default class App extends React.Component<{}, IAppState>{
 
   private cardService: ICardService;
   
-  constructor(props: {}){
-    super(props);    
+  private boardSizeDropDown: React.RefObject<HTMLSelectElement>;
 
-    this.state = { 
-      boardSize: 2,
+  constructor(props: {}) {
+    super(props);
+
+    this.state = {
+      boardSize: 0,
       isLoadingCards: true,
       cards: [],
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.cardService = new CardService(2);
+    
+    this.boardSizeDropDown = React.createRef();
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
 
-  componentDidMount(){
-    
+  componentDidMount() {
+
   }
 
   private handleCardClick(cardId: number) {
-      
+
   }
 
-  private handleChange(event: any){
+  private handleSubmit(event: any) {
     event.preventDefault();
-    
+
     this.setState({
-      cards: new Array<ICardProps>(),
       isLoadingCards: true
     });
 
-    this.cardService = new CardService(event.target.value);
-    this.cardService.getCards(this.handleCardClick).then((data)=>{
+    let boardSize = event.target['0'].value;
+    this.cardService = new CardService(boardSize);
+    this.cardService.getCards(this.handleCardClick).then((data) => {
       this.setState({
         cards: data,
+        boardSize: boardSize,
         isLoadingCards: false
       });
     });
 
-    this.setState({
-      boardSize: event.target.value
-    });
+    
   }
 
   public render() {
     return (
       <div>
-        <label>
+        <form onSubmit={this.handleSubmit}>
+          <label>
             Select board size:
           </label>
-          <select onChange={this.handleChange}>
+          <select ref={this.boardSizeDropDown}>
             <option value="2">2x2</option>
             <option value="4">4x4</option>
             <option value="6">6x6</option>
           </select>
-          
+          <button type='submit'>Start game</button>
+        </form>
         <div className='board'>
-            {!this.state.isLoadingCards ?  
-              <Board cards={this.state.cards} size={this.state.boardSize} />
-              :
-              <div>
-                loading cards
+          {!this.state.isLoadingCards ?
+            <Board cards={this.state.cards} size={this.state.boardSize} />
+            :
+            <div>
+              loading cards
               </div>
-            }
-          </div>
+          }
+        </div>
       </div>
 
     );

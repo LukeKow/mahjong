@@ -9,11 +9,13 @@ export default class CardService implements ICardService {
     // constructor(boardSize: number){
     //     this.cardsGetter = new MahjongCardForBoardGetter(boardSize);
     // }
+    private totalNumberOfCards: number;
+
     constructor(boardSize: number){
         this.totalNumberOfCards = boardSize * boardSize;
     }
 
-    private totalNumberOfCards: number;
+    
 
     async getCards(): Promise<ICardProps[]> {
         let cards: ICardProps[] = this.getCardsArray();
