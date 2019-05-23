@@ -28,7 +28,7 @@ export default class Card extends React.Component<ICardProps>{
     private renderTailsOnTop = (): JSX.Element => {
         return (
             <div className="cardValue">
-                X
+                {this.props.tailsValue}
             </div>
         );
     }
