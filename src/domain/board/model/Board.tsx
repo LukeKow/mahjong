@@ -3,7 +3,7 @@ import * as React from 'react';
 import Card from 'src/domain/card/model/Card';
 // import IBoardProps from './IBoardProps';
 import IBoardState from './IBoardState';
-// import '../Style/Board.css';
+import '../style/Board.css';
 // import CardService from 'src/services/CardService';
 // import ICardService from 'src/services/ICardService';
 import IBoardProps from './IBoardProps';
@@ -93,9 +93,9 @@ export default class Board extends React.Component<IBoardProps, IBoardState>{
       // }
 
       public render() {
+        let boardCssClassName = this.getBoardCssClass();
         return (
-
-          <div className='board'>
+          <div className={`board ${boardCssClassName}`}>
             {this.props.cards.map((mcard, index) => {
               if (mcard.placedOnBoard) {
                 return <Card key={mcard.id} {...mcard} />
@@ -105,7 +105,18 @@ export default class Board extends React.Component<IBoardProps, IBoardState>{
               }
             })}
           </div>
-
         );
+      }
+      private getBoardCssClass(): string{
+        switch(this.props.size.toString()){
+          case '2':
+            return 'twoOntwoBoard';
+          case '4':
+            return 'fourOnFourBoard';
+          case '6':
+            return 'sixOnSixBoard';
+          default: 
+            return '';
+        }
       }
 }
