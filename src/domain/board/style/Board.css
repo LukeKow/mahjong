@@ -1,3 +1,41 @@
+
 .board{
-    border: 2px solid black;    
+    border: 2px solid black;
+    display: grid;
+    place-items: center;
+    place-content: center;
+    width: 75vh;
+    height: 95vh;
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
+
+.board .card{
+    border: 1px solid grey;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 4% 2% 4% 2%;
+    height: 99%;
+    width: 99%;
+}
+.card .cardValue{
+    font-size: 1em; 
+}
+.twoOntwoBoard{
+    grid-template-columns: 40vh 40vh;
+    grid-template-rows: 40vh 40vh;
+}
+
+.fourOnFourBoard{
+    grid-template-columns: 20% 20% 20% 20%;
+    grid-template-rows: 20% 20% 20% 20%;
+}
+
+.sixOnSixBoard{
+    grid-template-columns: 15% 15% 15% 15% 15% 15%;
+    grid-template-rows: 15% 15% 15% 15% 15% 15%;
 }

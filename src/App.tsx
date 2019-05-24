@@ -76,7 +76,7 @@ export default class App extends React.Component<{}, IAppState>{
           </select>
           <button type='submit'>Start game</button>
         </form>
-        <div className='board'>
+        <div className='boardWrapper'>
           {!this.state.isLoadingCards ?
             <Board cards={this.state.cards} size={this.state.boardSize} />
             :
