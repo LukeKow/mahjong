@@ -8,8 +8,8 @@ export default class CardService implements ICardService {
         this.totalNumberOfCards = boardSize * boardSize;
     }    
 
-    async getCards(): Promise<ICardProps[]> {
-        let cards: ICardProps[] = this.getCardsArray();
+    async getCards(handleCardClick: Function): Promise<ICardProps[]> {
+        let cards: ICardProps[] = this.getCardsArray(handleCardClick);
         let indexes: number[] = this.getIndexes();
         let getRandomlyArrangedCards: Promise<ICardProps[]> =  new Promise<ICardProps[]>((resolve, reject) => {
             setTimeout(() => {
@@ -17,7 +17,9 @@ export default class CardService implements ICardService {
                 for(let i = indexes.length-1; i >= 0; i--){
                     let indexDraw = this.getRandomInt(0, i);
                     indexes.splice(indexDraw, 1)[0];
-                    randomlyArrangedCards.push(cards.splice(indexDraw, 1)[0]);
+                    let cardToPush = cards.splice(indexDraw, 1)[0];
+                    this.setCardId(randomlyArrangedCards.length, cardToPush);
+                    randomlyArrangedCards.push(cardToPush);
                 }
                 resolve(randomlyArrangedCards);
             }, 1000)
@@ -34,31 +36,33 @@ export default class CardService implements ICardService {
         return indexes;
     }
 
-    private getCardsArray(): ICardProps[]{
+    private getCardsArray(handleCardClick: Function): ICardProps[]{
         let cards: ICardProps[] = [];
         for(let i = 0; i < this.totalNumberOfCards; i+=2){
-            cards.push({
-                id: i,
+            cards[i] = {
+                id: 0,
                 headsOnTop: false,
                 headsValue: `[ ${(i+1).toString()} ]`,
                 tailsValue: '[M A H J O N G]',
                 playable: true,
-                handleClick: ()=>{},
+                handleClick: handleCardClick,
                 placedOnBoard: true,
-            });
-            cards.push({
-                id: i+1,
+            };
+            cards[i+1] = {
+                id: 0,
                 headsOnTop: false,
                 headsValue: `[ ${(i+1).toString()} ]`,
                 tailsValue: '[M A H J O N G]',
                 playable: true,
-                handleClick: ()=>{},
+                handleClick: handleCardClick,
                 placedOnBoard: true,
-            });
+            };
         }
         return cards;
     }
-
+    private setCardId(id: number, card: ICardProps){
+        card.id = id;
+    }
     private getRandomInt(min: number, max: number) {
         min = Math.ceil(min);
         max = Math.floor(max);

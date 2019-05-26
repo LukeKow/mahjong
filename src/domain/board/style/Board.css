@@ -23,11 +23,11 @@
     width: 99%;
 }
 .card .cardValue{
-    font-size: 1em; 
+    font-size: 0.8em; 
 }
 .twoOntwoBoard{
-    grid-template-columns: 40vh 40vh;
-    grid-template-rows: 40vh 40vh;
+    grid-template-columns: 40% 40%;
+    grid-template-rows: 40% 40%;
 }
 
 .fourOnFourBoard{
