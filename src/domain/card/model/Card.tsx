@@ -6,6 +6,8 @@ export default class Card extends React.Component<ICardProps>{
 
     constructor(props: ICardProps) {
         super(props);
+
+        this.handleClick = this.handleClick.bind(this);
     }
 
     public render() {
