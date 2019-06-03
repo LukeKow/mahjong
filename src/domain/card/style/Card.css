@@ -5,7 +5,9 @@
     padding: 40px 10px 40px 10px;
     height: 90%;
     width: 60%;
+    box-sizing: border-box;
 }
+
 .cardValue{
     font-size: 1em; 
 }

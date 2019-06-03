@@ -22,6 +22,9 @@
     height: 99%;
     width: 99%;
 }
+.board .card:hover{
+    border: 2px solid black;
+}
 .card .cardValue{
     font-size: 0.8em; 
 }

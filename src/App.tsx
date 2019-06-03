@@ -4,11 +4,12 @@ import Board from './domain/board/model/Board';
 import ICardService from './services/ICardService';
 import ICardProps from './domain/card/model/ICardProps';
 import CardService from './services/CardService';
+import loader from './loader.gif';
 
 interface IAppState {
   boardSize: number;
   cards: ICardProps[];
-  isLoadingCards: boolean;
+  showLoader: boolean;
 }
 
 export default class App extends React.Component<{}, IAppState>{
@@ -23,7 +24,7 @@ export default class App extends React.Component<{}, IAppState>{
 
     this.state = {
       boardSize: 0,
-      isLoadingCards: true,
+      showLoader: false,
       cards: [],
     };
 
@@ -49,7 +50,7 @@ export default class App extends React.Component<{}, IAppState>{
       stateCards[this.comparedCards[0].id].placedOnBoard = false;
       stateCards[this.comparedCards[1].id].placedOnBoard = false;
       setTimeout(() => {
-        alert('You have found a pair!');
+        // alert('You have found a pair!');
         this.setState({
           cards: stateCards,
         });
@@ -61,7 +62,7 @@ export default class App extends React.Component<{}, IAppState>{
       stateCards[this.comparedCards[1].id].headsOnTop = false;
       stateCards[this.comparedCards[1].id].playable = true;
       setTimeout(() => {
-        alert('Cards not match!');
+        // alert('Cards not match!');
         this.setState({
           cards: stateCards,
         });
@@ -86,7 +87,7 @@ export default class App extends React.Component<{}, IAppState>{
     event.preventDefault();
 
     this.setState({
-      isLoadingCards: true
+      showLoader: true
     });
 
     let boardSize = event.target['0'].value;
@@ -95,7 +96,7 @@ export default class App extends React.Component<{}, IAppState>{
       this.setState({
         cards: data,
         boardSize: boardSize,
-        isLoadingCards: false
+        showLoader: false
       });
     });
   }
@@ -114,13 +115,15 @@ export default class App extends React.Component<{}, IAppState>{
           </select>
           <button type='submit'>Start game</button>
         </form>
-        <div className='boardWrapper'>
-          {!this.state.isLoadingCards ?
-            <Board cards={this.state.cards} size={this.state.boardSize} />
-            :
+        <div className='boardWrapper'>        
+          {this.state.showLoader ?
             <div>
-              loading cards
-              </div>
+              <img src={loader} alt='LOADING...'/>
+            </div>            
+            : this.state.cards.length > 0 ?
+              <Board cards={this.state.cards} size={this.state.boardSize} />
+              : 
+              <div><br/></div>
           }
         </div>
       </div>
