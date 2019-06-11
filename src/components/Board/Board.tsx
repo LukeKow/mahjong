@@ -1,19 +1,12 @@
 import * as React from 'react';
-import Card from 'src/domain/card/model/Card';
-import IBoardState from './IBoardState';
-import '../style/Board.css';
+import Card from 'src/components/Card/Card';
+import './style/Board.css';
 import IBoardProps from './IBoardProps';
 
-export default class Board extends React.Component<IBoardProps, IBoardState>{
+export default class Board extends React.Component<IBoardProps,{}>{
 
   constructor(props: IBoardProps) {
     super(props);
-
-    this.state = {
-      cards: props.cards,
-      isLoadingCards: false,
-      size: props.size
-    };
   }
 
   public render() {

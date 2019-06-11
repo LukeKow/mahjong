@@ -1,5 +1,5 @@
 import ICardService from './ICardService'
-import ICardProps from 'src/domain/card/model/ICardProps';
+import ICardProps from 'src/components/Card/ICardProps';
 
 export default class CardService implements ICardService {
     private totalNumberOfCards: number;

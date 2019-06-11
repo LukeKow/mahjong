@@ -1,8 +1,8 @@
 import * as React from 'react';
 import './App.css';
-import Board from './domain/board/model/Board';
+import Board from './components/Board/Board';
 import ICardService from './services/ICardService';
-import ICardProps from './domain/card/model/ICardProps';
+import ICardProps from './components/Card/ICardProps';
 import CardService from './services/CardService';
 import loader from './loader.gif';
 
@@ -50,7 +50,6 @@ export default class App extends React.Component<{}, IAppState>{
       stateCards[this.comparedCards[0].id].placedOnBoard = false;
       stateCards[this.comparedCards[1].id].placedOnBoard = false;
       setTimeout(() => {
-        // alert('You have found a pair!');
         this.setState({
           cards: stateCards,
         });
@@ -62,7 +61,6 @@ export default class App extends React.Component<{}, IAppState>{
       stateCards[this.comparedCards[1].id].headsOnTop = false;
       stateCards[this.comparedCards[1].id].playable = true;
       setTimeout(() => {
-        // alert('Cards not match!');
         this.setState({
           cards: stateCards,
         });
