@@ -1,7 +1,7 @@
 import Card from './Card';
 import { observable, action, computed } from 'mobx';
 
-class CardsStore {
+export default class CardsStore {
     
     @observable
     public cards: Card[] = [];
@@ -13,7 +13,7 @@ class CardsStore {
 
     @action
     public toggleCardSide=(card: Card)=>{
-        card.isHeadsUp = !card.isHeadsUp;
+        card.toggleIsHeadsUp();
     }
 
     @computed
@@ -22,6 +22,3 @@ class CardsStore {
     }
 
 }
-
-const store = new CardsStore();
-export default store;
