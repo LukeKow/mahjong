@@ -13,7 +13,7 @@ export default class CardsStore {
 
     @action
     public toggleCardSide=(card: Card)=>{
-        card.toggleIsHeadsUp();
+        card.isHeadsUp = !card.isHeadsUp;
     }
 
     @computed
@@ -21,4 +21,12 @@ export default class CardsStore {
         return this.cards.length;
     }
 
+    @computed
+    public get cardsHeadUp(): number {
+        return this.cards.filter((card) => {return card.isHeadsUp === true;}).length;
+    }
+    @computed
+    public get cardsHeadDown(): number {
+        return this.cards.filter((card) => {return card.isHeadsUp === false;}).length;
+    }
 }

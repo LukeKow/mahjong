@@ -18,13 +18,13 @@ export default class CardsComponent extends React.Component<ICardsComponentProps
     handleCardClick = (event: React.MouseEvent<HTMLLIElement>) => {
         let id = Number.parseInt((event as any)._targetInst.key);
         let card = this.store.cards.find((card) => card.id === id);
-        if(card) card.toggleIsHeadsUp();
+        if(card) this.store.toggleCardSide(card);
     }
     handleHeadsCHange = (e: React.ChangeEvent<HTMLInputElement>) => {
         this.headsValue = e.target.value;
     }
     handleHeadsUpChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        this.isHeadsUp = e.target.value;
+        this.isHeadsUp = e.target.checked;
     }
     handleSubmit = (event: React.FormEvent<any>) => {
         event.preventDefault();
@@ -35,6 +35,9 @@ export default class CardsComponent extends React.Component<ICardsComponentProps
     public render() {
         return (
             <div>
+                <div>
+                    <span>heads up: {this.store.cardsHeadUp} </span><span> heads down: {this.store.cardsHeadDown}</span>
+                </div>
                 <ul>
                     {this.store.cards.map(card =>
                         (<li key={card.id} onClick={this.handleCardClick}>{card.isHeadsUp ? card.headsValue : "TAILS"}</li>)
