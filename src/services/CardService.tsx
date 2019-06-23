@@ -1,66 +1,49 @@
 import ICardService from './ICardService'
-import ICardProps from 'src/domain/card/model/ICardProps';
+import Card from '../model/Card/Card';
 
 export default class CardService implements ICardService {
-    private totalNumberOfCards: number;
 
-    constructor(boardSize: number){
-        this.totalNumberOfCards = boardSize * boardSize;
-    }    
-
-    async getCards(handleCardClick: Function): Promise<ICardProps[]> {
-        let cards: ICardProps[] = this.getCardsArray(handleCardClick);
-        let indexes: number[] = this.getIndexes();
-        let getRandomlyArrangedCards: Promise<ICardProps[]> =  new Promise<ICardProps[]>((resolve, reject) => {
+    async getCards(cardsAmount: number): Promise<Card[]> {
+        let cards: Card[] = this.getCardsArray(cardsAmount);
+        let indexes: number[] = this.getIndexes(cardsAmount);
+        let getRandomlyArrangedCards: Promise<Card[]> =  new Promise<Card[]>((resolve, reject) => {
             setTimeout(() => {
-                let randomlyArrangedCards: ICardProps[] = [];
-                for(let i = indexes.length-1; i >= 0; i--){
-                    let indexDraw = this.getRandomInt(0, i);
-                    indexes.splice(indexDraw, 1)[0];
-                    let cardToPush = cards.splice(indexDraw, 1)[0];
-                    this.setCardId(randomlyArrangedCards.length, cardToPush);
-                    randomlyArrangedCards.push(cardToPush);
-                }
+                let randomlyArrangedCards: Card[] = [];
+                this.fillArrayWithRandomlyArrangedCards(indexes, cards, randomlyArrangedCards);
                 resolve(randomlyArrangedCards);
             }, 1000)
         });
-        let randomlyArrangedCards: ICardProps[] = await getRandomlyArrangedCards;
+        let randomlyArrangedCards: Card[] = await getRandomlyArrangedCards;
         return randomlyArrangedCards;
     }
 
-    private getIndexes(): number[]{
+    private getIndexes(cardsAmount: number): number[]{
         let indexes: number[] = [];
-        for(let i = 0; i < this.totalNumberOfCards; i++){
-            indexes.push(i);
+        for(let i = 0; i < cardsAmount; i++){
+            indexes.push(i+1);
         }
         return indexes;
     }
 
-    private getCardsArray(handleCardClick: Function): ICardProps[]{
-        let cards: ICardProps[] = [];
-        for(let i = 0; i < this.totalNumberOfCards; i+=2){
-            cards[i] = {
-                id: 0,
-                headsOnTop: false,
-                headsValue: `[ ${(i+1).toString()} ]`,
-                tailsValue: '[M A H J O N G]',
-                playable: true,
-                handleClick: handleCardClick,
-                placedOnBoard: true,
-            };
-            cards[i+1] = {
-                id: 0,
-                headsOnTop: false,
-                headsValue: `[ ${(i+1).toString()} ]`,
-                tailsValue: '[M A H J O N G]',
-                playable: true,
-                handleClick: handleCardClick,
-                placedOnBoard: true,
-            };
+    private getCardsArray(cardsAmount: number): Card[]{
+        let cards: Card[] = [];
+        for(let i = 0; i < cardsAmount; i+=2){
+            cards[i] = new Card( i+1, '[M A H J O N G]', `[ ${(i+1).toString()} ]`, true, true, true );
+            cards[i+1] = new Card( i+2, '[M A H J O N G]', `[ ${(i+1).toString()} ]`, true, true, true );
         }
         return cards;
     }
-    private setCardId(id: number, card: ICardProps){
+
+    private fillArrayWithRandomlyArrangedCards = (indexes: number[], cards: Card[], arrayToFill: Card[]) : void => {
+        for(let i = indexes.length-1; i >= 0; i--){
+            let indexDraw = this.getRandomInt(0, i);
+            indexes.splice(indexDraw, 1)[0];
+            let cardToPush = cards.splice(indexDraw, 1)[0];
+            // this.setCardId(arrayToFill.length, cardToPush);
+            arrayToFill.push(cardToPush);
+        }
+    }
+    private setCardId(id: number, card: Card){
         card.id = id;
     }
     private getRandomInt(min: number, max: number) {

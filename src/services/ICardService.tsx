@@ -1,5 +1,5 @@
-import ICardProps from 'src/domain/card/model/ICardProps';
+import Card from '../model/Card/Card';
 
 export default interface ICardService{
-    getCards (handleCardClick: Function): Promise<Array<ICardProps>>;
+    getCards(cardsAmount: number): Promise<Array<Card>>;
 }
