@@ -3,6 +3,7 @@ import IBoardProps from './IBoardProps';
 import IBoardInjectedProps from './IBoardIncjectedProps';
 import { observer, inject } from 'mobx-react';
 import './Board.css';
+import Card from 'src/model/Card/Card';
 
 @inject('cardStore')
 @observer
@@ -25,7 +26,7 @@ export default class Board extends React.Component<IBoardProps, {}>{
 
     cardClickedHandler(event: React.MouseEvent<HTMLDivElement, MouseEvent>): void {
         let id = Number.parseInt((event as any)._targetInst.key);
-        this.store.toggleCardSide(id);
+        this.store.handleCardClick(id);
     }
 
     render() {
@@ -38,11 +39,19 @@ export default class Board extends React.Component<IBoardProps, {}>{
                         key={card.id}
                         onClick={this.cardClickedHandler}>
                         <div className='cardValue'>
-                            {card.isHeadsUp ? card.heads : card.tails}
+                            {this.renderCard(card)}
                         </div>
                     </div>
                 })}
             </div>
         );
+    }
+
+    renderCard(card: Card): JSX.Element{
+        if(!card.inGame){
+            return(<div> :-) </div>)
+        } else {
+            return <div>{card.isHeadsUp ? card.heads : card.tails}</div>;
+        }
     }
 }

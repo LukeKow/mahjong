@@ -8,6 +8,7 @@ export default class Card{
     @observable
     isHeadsUp: boolean;
     playable: boolean;
+    @observable
     inGame: boolean;
     
     @action
