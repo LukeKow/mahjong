@@ -22,6 +22,9 @@
     height: 99%;
     width: 99%;
 }
+.board .card:hover{
+    border: 2px solid black;
+}
 .card .cardValue{
     font-size: 0.8em; 
 }
@@ -38,4 +41,18 @@
 .sixOnSixBoard{
     grid-template-columns: 15% 15% 15% 15% 15% 15%;
     grid-template-rows: 15% 15% 15% 15% 15% 15%;
+}
+
+.card{
+    border: 1px solid grey;
+    display: flex;
+    flex-direction: column;
+    padding: 40px 10px 40px 10px;
+    height: 90%;
+    width: 60%;
+    box-sizing: border-box;
+}
+
+.cardValue{
+    font-size: 1em; 
 }
