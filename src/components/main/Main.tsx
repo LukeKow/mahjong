@@ -8,7 +8,7 @@ export default class Main extends React.Component<{},{}> {
             <Router>
                 <div className="container">
                     <Route exact={true} path="/" component={Home} />
-                    <Route path="/board" component={Board} />                    
+                    <Route path="/board/:cardsAmount" component={Board} />           
                 </div>
             </Router>
         );

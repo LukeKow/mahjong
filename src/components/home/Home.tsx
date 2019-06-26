@@ -1,20 +1,16 @@
 import * as React from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
+import Options from '../options/Options';
 
 class Home extends React.Component<RouteComponentProps,{}>{
-    private clickHandler = () => {
-        this.props.history.push("/board");
-    }
 
     render(){
         return(
             <div>
-                <div>HOME PAGE</div>
-                <div><button onClick={this.clickHandler}>Board</button></div>
-            </div>
-            
+                <h1>MAHJONG</h1>
+                <Options/>                
+            </div>            
         );
     }
 }
-
 export default withRouter(Home);
