@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/react-router": "^5.0.2",
+    "@types/react-router-dom": "^4.3.4",
     "mobx": "^5.9.4",
     "mobx-react": "^6.0.2",
     "react": "^16.8.6",

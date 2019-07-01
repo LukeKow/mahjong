@@ -28,17 +28,17 @@
 .card .cardValue{
     font-size: 0.8em; 
 }
-.twoOntwoBoard{
+.fourCardsBoard{
     grid-template-columns: 40% 40%;
     grid-template-rows: 40% 40%;
 }
 
-.fourOnFourBoard{
+.sixteenCardsBoard{
     grid-template-columns: 20% 20% 20% 20%;
     grid-template-rows: 20% 20% 20% 20%;
 }
 
-.sixOnSixBoard{
+.thirtysixCardsBoard{
     grid-template-columns: 15% 15% 15% 15% 15% 15%;
     grid-template-rows: 15% 15% 15% 15% 15% 15%;
 }

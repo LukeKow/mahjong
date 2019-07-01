@@ -9,13 +9,14 @@ import './index.css';
 import CardService from './services/CardService';
 import CardsStore from './stores/cardsStore/CardsStore';
 import Board from './components/board/Board';
+import Main from './components/main/Main';
 
 const cardsService = new CardService();
 const cardStore = new CardsStore(cardsService);
 
 ReactDOM.render(
   <Provider cardStore={cardStore}>
-    <Board />
+    <Main />
   </Provider>, document.getElementById('root')
 );
 registerServiceWorker();

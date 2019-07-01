@@ -15,8 +15,8 @@ export default class CardsStore {
     cards: Card[];
 
     @action
-    public loadCards(): void {
-        this.cardsService.getCards(16).then((data) => {
+    public loadCards(cardsNumber: number): void {
+        this.cardsService.getCards(cardsNumber).then((data) => {
             this.cards = data;
         });
     }

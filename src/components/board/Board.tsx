@@ -1,27 +1,43 @@
 import * as React from 'react';
-import IBoardProps from './IBoardProps';
-import IBoardInjectedProps from './IBoardIncjectedProps';
 import { observer, inject } from 'mobx-react';
-import './Board.css';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
+
 import Card from 'src/model/Card/Card';
+import IBoardProps from './IBoardProps';
+import BoardCssClass from './BoardCssClass';
+import IBoardInjectedProps from './IBoardIncjectedProps';
+
+import './Board.css';
+import CardsAmountForBoard from 'src/common/CardsAmountForBoard';
 
 @inject('cardStore')
 @observer
-export default class Board extends React.Component<IBoardProps, {}>{
-    constructor(props: IBoardProps) {
+class Board extends React.Component<IBoardProps & RouteComponentProps, {}>{
+    constructor(props: IBoardProps & RouteComponentProps) {
         super(props);
         this.cardClickedHandler = this.cardClickedHandler.bind(this);
     }
     get injectedProps() {
-        return this.props as IBoardInjectedProps;
+        return this.props as IBoardProps as IBoardInjectedProps;
     }
 
     get store() {
         return this.injectedProps.cardStore;
     }
 
+    get cardsAmount(){
+        return Number.parseInt(
+            (this.props.match.params as any).cardsAmount);
+    }
+
     componentDidMount() {
-        this.injectedProps.cardStore.loadCards();
+        let isAmountValid: boolean = CardsAmountForBoard.includes(this.cardsAmount);
+        
+        if(!isAmountValid) {
+            this.props.history.goBack();
+        } else {
+            this.injectedProps.cardStore.loadCards(this.cardsAmount);
+        }
     }
 
     cardClickedHandler(event: React.MouseEvent<HTMLDivElement, MouseEvent>): void {
@@ -32,7 +48,7 @@ export default class Board extends React.Component<IBoardProps, {}>{
     render() {
         const cardsFromStore = this.injectedProps.cardStore.cards;
         return (
-            <div className={'board fourOnFourBoard'}>
+            <div className={`board ${BoardCssClass(this.cardsAmount)}`}>
                 {cardsFromStore && this.injectedProps.cardStore.cards.map((card) => {
                     return <div
                         className="card"
@@ -55,3 +71,4 @@ export default class Board extends React.Component<IBoardProps, {}>{
         }
     }
 }
+export default withRouter(Board);
