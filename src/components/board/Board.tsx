@@ -1,12 +1,14 @@
 import * as React from 'react';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { observer, inject } from 'mobx-react';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 import Card from 'src/model/Card/Card';
 import IBoardProps from './IBoardProps';
+import BoardCssClass from './BoardCssClass';
 import IBoardInjectedProps from './IBoardIncjectedProps';
 
 import './Board.css';
+import CardsAmountForBoard from 'src/common/CardsAmountForBoard';
 
 @inject('cardStore')
 @observer
@@ -29,9 +31,10 @@ class Board extends React.Component<IBoardProps & RouteComponentProps, {}>{
     }
 
     componentDidMount() {
-        let tmp = Math.sqrt(this.cardsAmount);
-        if(!Number.isInteger(tmp)) {
-            this.props.history.push('/');
+        let isAmountValid: boolean = CardsAmountForBoard.includes(this.cardsAmount);
+        
+        if(!isAmountValid) {
+            this.props.history.goBack();
         } else {
             this.injectedProps.cardStore.loadCards(this.cardsAmount);
         }
@@ -44,13 +47,8 @@ class Board extends React.Component<IBoardProps & RouteComponentProps, {}>{
 
     render() {
         const cardsFromStore = this.injectedProps.cardStore.cards;
-        const colNumber = Math.sqrt(this.cardsAmount);
-        const colWidth = 90 / colNumber;
-        const styles = {
-            gridTemplateColumns: `repeat(${colNumber}, ${colWidth}%)`
-        };
         return (
-            <div className={'board'} style={styles}>
+            <div className={`board ${BoardCssClass(this.cardsAmount)}`}>
                 {cardsFromStore && this.injectedProps.cardStore.cards.map((card) => {
                     return <div
                         className="card"
