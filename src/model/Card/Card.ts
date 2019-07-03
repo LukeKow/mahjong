@@ -16,7 +16,7 @@ export default class Card{
         this.isHeadsUp = !this.isHeadsUp;
     }
 
-    constructor(id: number, heads: string, tails: string, isHeadsUp: boolean, playable: boolean, inGame: boolean){
+    constructor(id: number, heads: string, tails: string, isHeadsUp: boolean, playable: boolean, inGame: boolean) {
         this.id= id;
         this.heads = heads;
         this.tails = tails;

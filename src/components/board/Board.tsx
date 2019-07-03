@@ -25,7 +25,7 @@ class Board extends React.Component<IBoardProps & RouteComponentProps, {}>{
         return this.injectedProps.cardStore;
     }
 
-    get cardsAmount(){
+    get cardsAmount() {
         return Number.parseInt(
             (this.props.match.params as any).cardsAmount);
     }
@@ -63,8 +63,8 @@ class Board extends React.Component<IBoardProps & RouteComponentProps, {}>{
         );
     }
 
-    renderCard(card: Card): JSX.Element{
-        if(!card.inGame){
+    renderCard(card: Card): JSX.Element {
+        if(!card.inGame) {
             return(<div> :-) </div>)
         } else {
             return <div>{card.isHeadsUp ? card.heads : card.tails}</div>;

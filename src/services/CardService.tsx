@@ -17,17 +17,17 @@ export default class CardService implements ICardService {
         return randomlyArrangedCards;
     }
 
-    private getIndexes(cardsAmount: number): number[]{
+    private getIndexes(cardsAmount: number): number[] {
         let indexes: number[] = [];
-        for(let i = 0; i < cardsAmount; i++){
+        for(let i = 0; i < cardsAmount; i++) {
             indexes.push(i+1);
         }
         return indexes;
     }
 
-    private getCardsArray(cardsAmount: number): Card[]{
+    private getCardsArray(cardsAmount: number): Card[] {
         let cards: Card[] = [];
-        for(let i = 0; i < cardsAmount; i+=2){
+        for(let i = 0; i < cardsAmount; i+=2) {
             cards[i] = new Card( i+1, '[M A H J O N G]', `[ ${(i+1).toString()} ]`, true, true, true );
             cards[i+1] = new Card( i+2, '[M A H J O N G]', `[ ${(i+1).toString()} ]`, true, true, true );
         }
@@ -35,7 +35,7 @@ export default class CardService implements ICardService {
     }
 
     private fillArrayWithRandomlyArrangedCards = (indexes: number[], cards: Card[], arrayToFill: Card[]) : void => {
-        for(let i = indexes.length-1; i >= 0; i--){
+        for(let i = indexes.length-1; i >= 0; i--) {
             let indexDraw = this.getRandomInt(0, i);
             indexes.splice(indexDraw, 1)[0];
             let cardToPush = cards.splice(indexDraw, 1)[0];
@@ -43,7 +43,7 @@ export default class CardService implements ICardService {
             arrayToFill.push(cardToPush);
         }
     }
-    private setCardId(id: number, card: Card){
+    private setCardId(id: number, card: Card) {
         card.id = id;
     }
     private getRandomInt(min: number, max: number) {

@@ -16,7 +16,7 @@ class Options extends React.Component<RouteComponentProps,{}>{
 
     }
 
-    render(){
+    render() {
         return(
             <div>
                 <select onChange={this.handleSelectChange}>

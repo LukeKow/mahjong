@@ -4,7 +4,7 @@ import Options from '../options/Options';
 
 class Home extends React.Component<RouteComponentProps,{}>{
 
-    render(){
+    render() {
         return(
             <div>
                 <h1>MAHJONG</h1>
